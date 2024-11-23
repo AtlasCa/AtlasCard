@@ -3,15 +3,32 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=0.7, maximum-scale=1.0, user-scalable=no">
     <title>AtlasCard - Тарифы, FAQ, Новости, О нас</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+    /* Добавьте эти стили в самом начале */
+    html, body {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+    }
+
+/* Добавляем контейнер для всего контента */
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
         body {
-            background-color: #FFFFFF;
+            background-color: #F1F1F1;
             color: #6A6A6A;
             font-family: 'Roboto', sans-serif;
             margin: 0;
@@ -58,6 +75,7 @@
 
         .hero-section {
             background-color: #F1F1F1;
+            padding: 50px 20px; /* Увеличиваем отступы сверху и снизу */
             height: 70vh;
             display: flex;
             justify-content: center;
@@ -155,7 +173,7 @@
                 transform: translateX(0%);
             }
             100% {
-                transform: translateX(-185.333%);
+                transform: translateX(-350.333%);
             }
         }
 
@@ -295,13 +313,29 @@
             padding: 20px;
         }
 
+.text-section-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto 40px auto;
+    padding: 0 20px;
+}
+
         .text-section {
-            text-align: center;
             font-size: 1.8rem;
             color: #12401E;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin: 0;
+            white-space: nowrap; /* Предотвращаем перенос текста */
         }
+
+.text-section-container .small-hero-button {
+    margin: 0;
+    white-space: nowrap;
+}
+
 
         .button-section {
             text-align: center;
@@ -334,6 +368,37 @@
             justify-content: center;
             animation: fadeIn 0.6s;
         }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    .continue-button {
+        background-color: #FF9F00;
+        color: #FFFFFF;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .continue-button:hover {
+        background-color: #FFFFFF;
+        color: #12401E;
+    }
 
         @keyframes fadeIn {
             from {
@@ -402,66 +467,97 @@
             min-height: 100%;
             width: auto;
             height: auto;
-            transform: translate(-50%, -50%) scale(0.6); /* Центрирование видео */
+            transform: translate(-50%, -50%) scale(0.7); /* Центрирование видео */
             object-fit: cover; /* Обрезка видео для заполнения */
         }
 
-
-
-@media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        padding: 10px;
-        align-items: center;
-    }
-
-    .features-section .container {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .feature-card {
-        width: 100%; /* Карточки займут всю ширину экрана на маленьких устройствах */
-    }
-
-    .video-section {
-        height: 50vh; /* Уменьшаем высоту видео на мобильных устройствах */
-    }
-
-    .all-services-button {
-        width: 90%;
-    }
-
-    .main-nav ul {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .modal-content {
-        width: 90%; /* Увеличиваем ширину модального окна на мобильных устройствах */
-    }
+.burger-menu {
+    display: none;
+    cursor: pointer;
+    z-index: 1000;
 }
 
-@media (max-width: 768px) {
-    video {
-        transform: translate(-50%, -50%) scale(1); /* Возвращаем стандартный масштаб */
-        min-width: auto; 
-        min-height: auto;
-        width: 100vw; /* Ширина видео - вся ширина экрана */
-        height: auto; /* Высота пропорциональна */
-    }
+.mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #12401E;
+    z-index: 999;
 }
 
+.mobile-menu.active {
+    display: block;
+}
 
     </style>
 </head>
 
 <body>
 
+<div class="burger-menu" onclick="toggleMenu()">
+    ☰
+</div>
+<nav class="mobile-menu" id="mobileMenu">
+    <ul>
+        <li><a href="index.html" onclick="toggleMenu()">Главная</a></li>
+        <li><a href="tarrifs.html" onclick="toggleMenu()">Тарифы</a></li>
+        <li><a href="#faq-section" onclick="scrollToSection('faq-section'); toggleMenu()">FAQ</a></li>
+        <li><a href="#about-section" onclick="scrollToSection('about-section'); toggleMenu()">О нас</a></li>
+        <li><a href="docs.html" onclick="toggleMenu()">Статьи</a></li>
+        <li><a href="#footer" onclick="scrollToSection('footer'); toggleMenu()">Контакты</a></li>
+    </ul>
+</nav>
+
+<script>
+function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const burger = document.querySelector('.burger-menu');
+    
+    if (menu.classList.contains('active')) {
+        menu.classList.remove('active');
+        burger.innerHTML = '☰';
+        document.body.style.overflow = '';
+    } else {
+        menu.classList.add('active');
+        burger.innerHTML = '✕';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+        // Добавляем небольшую задержку для мобильного меню
+        setTimeout(() => {
+            const headerOffset = 80; // Высота хедера
+            const elementPosition = section.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }, 100);
+    }
+}
+
+// Исправляем ссылку на тарифы, если URL неверный
+document.addEventListener('DOMContentLoaded', function() {
+    const tariffLinks = document.querySelectorAll('a[href="tarrifs.html"]');
+    tariffLinks.forEach(link => {
+        link.href = "tarrifs.html"; // Проверьте правильность написания URL
+    });
+});
+</script>
+
+    </style>
     <!-- Видеосекция -->
     <section class="video-section">
         <video autoplay loop muted playsinline>
-            <source src="i/img/video.mp4" type="video/mp4">
+            <source src="img/video.mp4" type="video/mp4">
             Ваш браузер не поддерживает элемент видео.
         </video>
         <div class="video-overlay-content">
@@ -469,14 +565,15 @@
     </section>
 
     <header>
-        <div style="font-family: 'Roboto', sans-serif; font-weight: 700; font-size: 2.5rem; color: #12401E;">AtlasCard</div>
+    <a href="index.html" style="font-family: 'Roboto', sans-serif; font-weight: 700; font-size: 2.5rem; color: #12401E; text-decoration: none;">AtlasCard</a>
         <div class="nav-container">
             <nav>
                 <a href="index.html">Главная</a>
                 <a href="tarrifs.html">Тарифы</a>
-                <a href="#faq-section" class="learn-more">FAQ</a>
-                <a href="#about-section">О нас</a>
-                <a href="#contact">Контакты</a>
+                <a href="#faq-section" onclick="scrollToSection('faq-section')">FAQ</a>
+                <a href="#about-section" onclick="scrollToSection('about-section')">О нас</a>
+                <a href="docs.html">Статьи</a>
+                <a href="#footer" onclick="scrollToSection('footer')">Контакты</a>
             </nav>
         </div>
     </header>
@@ -586,6 +683,8 @@
 <!-- Modal window -->
 <div id="modal" class="modal">
     <div class="modal-content">
+<button class="close-button" onclick="closeModal()">&#10005;</button>
+
         <div class="modal-left">
             <img src="img/vipustit.png" alt="AtlasCard Phone" style="max-width: 250%; height: auto;">
         </div>
@@ -593,7 +692,7 @@
             <h2>AtlasCard - это удобное мини-приложение в Telegram</h2>
             <img src="img/QRcode.png" alt="QR code" style="max-width: 300px; height: auto;">
             <p>Нажмите "Продолжить", чтобы открыть с текущего устройства</p>
-            <a href="https://t.me/AtlasCard_bot" class="hero-button">Продолжить</a>
+            <a href="https://t.me/AtlasCard_bot" class="hero-button" style="padding: 8px 20px; font-size: 1rem;">Продолжить</a>
         </div>
     </div>
 </div>
@@ -620,14 +719,16 @@
 
     <!-- Новая секция "О нас" -->
     <section class="features-section" style="background-color: #F1F1F1;">
-        <div class="text-section" style="margin-bottom: 40px;">Чтобы оформить виртуальную карту, вам нужен только Telegram
-<a href="javascript:void(0);" class="small-hero-button" onclick="openModal()">Выпустить карту</a>
-
+        <div class="text-section-container">
+            <div class="text-section">
+                Чтобы оформить виртуальную карту, вам нужен только Telegram
+            </div>
+            <a href="javascript:void(0);" class="small-hero-button" onclick="openModal()">Выпустить карту</a>
         </div>
 
 <div class="features-container">
             <div class="feature-card">
-                <img src="img/createvirtualcard.png" alt="Создайте виртуальную карту в Telegram">
+                <img src="img/createvirtualcard.png" alt="Создайте виртуальную   арту в Telegram">
                 <h3>Создайте виртуальную карту в Telegram</h3>
                 <p>С помощью AtlasCard вы сможете быстро и безопасно выпустить виртуальную карту.</p>
             </div>
@@ -658,7 +759,7 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         overflow: hidden;
         padding: 20px;
-        text-align: center;
+        text-align: left;
         transition: transform 0.3s ease;
         height: 100%; /* Чтобы все карточки были одной высоты */
     }
@@ -691,9 +792,11 @@
         }
 
         .cards-online-container {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
+    display: flex;
+    gap: 30px; /* Расстояние между карточками */
+    justify-content: center; /* Распределяем карточки с равными отступами */
+    max-width: 1200px;
+    margin: 0 auto; /* Центрируем секцию */
         }
 
         .card-type {
@@ -765,6 +868,42 @@
         .service-section-button {
             margin-top: 40px;
         }
+
+.footer {
+    background-color: #F1F1F1;
+        color: #000000;
+    padding: 20px 0;
+    margin-top: 40px;
+}
+
+.footer-content {
+    text-align: center;
+}
+
+.privacy-link {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 20px;
+    display: inline-block;
+    margin-top: 10px;
+    transition: color 0.3s;
+}
+
+.privacy-link:hover {
+    color: #FF9F00;
+}
+
+@media screen and (max-width: 768px) {
+    .footer {
+        padding: 15px 0;
+    }
+    
+    .privacy-link {
+        font-size: 1.2rem;
+        padding: 8px 16px;
+    }
+}
 
 </style>
 
@@ -939,6 +1078,7 @@
             }
         }
 
+
 </style>
 
 
@@ -1010,7 +1150,7 @@
 
 
     <!-- "О нас" Section -->
-<section id="about-section" class="about-section">
+    <section id="about-section" class="about-section">
         <h2>О нас</h2>
         <p>AtlasCard - это ваша возможность получить международные виртуальные карты для удобных и безопасных покупок по всему миру. Мы гордимся тем, что предоставляем простой и быстрый способ оформления карты, который позволяет вам оплачивать онлайн-сервисы, подписки и товары, не выходя из дома. Наша миссия - обеспечить удобство и безопасность всем пользователям.</p>
         <img src="logo.png" alt="О нас" class="about-image">
@@ -1024,7 +1164,7 @@
         <div class="faq-item">
             <button class="faq-question">Что такое AtlasCard и как он работает?</button>
             <div class="faq-answer">
-                <p>Виртуальная карта работает так же, как обычная банковская карта, с той разницей, что она не имеет физического носителя. Вы можете использовать её данные для безопасных покупок и оплат онлайн по всему миру.</p>
+                <p>Виртуальная карта работает так же, как обычная банковская карта, с той раз  ицей, что она не имеет физического носителя. Вы можете использовать её данные для безопасных покупок и оплат онлайн по всему миру.</p>
             </div>
         </div>
         <div class="faq-item">
@@ -1049,7 +1189,7 @@
         <div class="faq-item">
             <button class="faq-question">Принцип работы виртуальной карты</button>
             <div class="faq-answer">
-                <p>Использование виртуальной карты не отличается от стандартной: просто вводите её данные при оплате. Это позволяет безопасно совершать покупки, не раскрывая данные вашей личной карты..</p>
+                <p>Использование виртуальной карты не отличается от с  андартной: просто вводите её данные при оплате. Это позволяет безопасно совершать покупки, не раскрывая данные вашей личной карты..</p>
             </div>
         </div>
         <div class="faq-item">
@@ -1200,46 +1340,23 @@
             right: 15px;
         }
 
+            .footer {
+            background-color: #12401E;
+            color: #FFFFFF;
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 1rem;
+        }
 
-.burger-menu {
-    display: none;
-    font-size: 2rem;
-    cursor: pointer;
-    color: #FFFFFF;
-}
+        .footer a {
+            color: #FF9F00;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
 
-.mobile-menu {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    background-color: #12401E;
-}
-
-@media (max-width: 768px) {
-    .burger-menu {
-        display: block;
-    }
-
-    .main-nav ul {
-        display: none;
-    }
-}
-
-
-@media (max-width: 768px) {
-    .feature-card img {
-        width: 30px;
-    }
-}
-
-
-@media (max-width: 768px) {
-    .all-services-button, .feature-card button {
-        padding: 15px 20px;
-        font-size: 1rem;
-    }
-}
-
+        .footer a:hover {
+            color: #FFFFFF;
+        }
 </style>
 
 <script>
@@ -1251,26 +1368,6 @@
     });
 </script>
 
-<div class="burger-menu" onclick="toggleMenu()">
-    ☰
-</div>
-<nav class="mobile-menu" id="mobileMenu">
-    <ul>
-        <li><a href="#">Главная</a></li>
-        <li><a href="#tariffs-section">Тарифы</a></li>
-        <li><a href="#faq-section">FAQ</a></li>
-        <li><a href="#about-section">О нас</a></li>
-        <li><a href="#contact">Контакты</a></li>
-    </ul>
-</nav>
-
-<script>
-    function toggleMenu() {
-        const menu = document.getElementById('mobileMenu');
-        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-    }
-</script>
-
 
 <section class="reviews-section">
     <h2>Отзывы клиентов</h2>
@@ -1280,7 +1377,7 @@
             <div class="reviewer">- Иван, Москва</div>
         </div>
         <div class="review-item">
-            <p>"AtlasCard действительно упрощает оплату подписок на любимые сервисы. Мне больше не нужно беспокоиться о том, как оплатить Spotify или Netflix."</p>
+            <p>"AtlasCard действительно упрощает оплату подписок   а любимые сер  исы. Мне больше не нужно беспокоиться о том, как оплатить Spotify или Netflix."</p>
             <div class="reviewer">- Анастасия, Санкт-Петербург</div>
         </div>
         <div class="review-item">
@@ -1355,15 +1452,695 @@
     .start-button:hover {
         background-color: #12401E;
     }
-</style>
+
+@media (max-width: 768px) {
+
+    /* Основные элементы */
+    body {
+        font-size: 16px;
+        overflow-x: hidden;
+    }
 
 
 
-    <style>
-        0%); }
-            to { transform: translateX(-100%); }
+    .nav-container {
+        display: none; /* Скрываем стандартное меню */
+    }
+
+    /* Бургер-меню */
+    .burger-menu {
+        display: block;
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        font-size: 24px;
+        color: #12401E;
+        z-index: 1001;
+        background: white;
+        padding: 8px 12px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .mobile-menu {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(18, 64, 30, 0.98);
+        padding: 80px 20px 20px;
+        padding-top: 70px;
+        z-index: 999;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .mobile-menu.active {
+        display: block;
+        transform: translateX(0);
+    }
+
+    .mobile-menu ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .mobile-menu li {
+        margin: 20px 0;
+        text-align: center;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        padding-bottom: 15px;
+    }
+
+    .mobile-menu a {
+        color: white;
+        font-size: 1.4rem;
+        text-decoration: none;
+        display: block;
+        padding: 10px;
+    }
+
+    /* Секции */
+    .hero-section,
+    .features-section,
+    .cards-online-section,
+    .services-section,
+    .reviews-section,
+    .faq-section,
+    .start-section {
+        padding: 40px 15px;
+    }
+
+    /* Видео секция */
+@media (max-width: 768px) 
+    .video-section {
+        height: 70vh; /* Увеличение высоты контейнера на 70% от видимой части экрана */
+    }
+
+    video {
+        height: 100vh; /* Видео занимает 100% высоты экрана */
+        width: auto; /* Автоматическая ширина, чтобы сохранить пропорции */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        object-fit: cover; /* Обрезка видео для заполнения контейнера */
+    }
+
+
+@media (max-width: 768px) {
+    /* Герой секция */
+    .hero-section {
+        padding-top: 40px;
+        margin-top: -20px !important; /* Поднимаем скцию ближе к видео */
+        min-height: auto !important; /* Убираем фиксированную высоту */
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+@media screen and (max-width: 768px) {
+    .hero-section {
+        zoom: 0.8; /* Добавляем масштабирование для мобильных устройств */
+        -moz-transform: scale(0.8); /* Для Firefox */
+        -moz-transform-origin: 0 0;
+        min-height: auto !important;
+    }
+
+    /* Корректируем размеры контента */
+    .hero-section > div {
+        transform: scale(1);
+        width: 100%;
+        max-width: 100%;
+        padding: 0 15px;
+        box-sizing: border-box;
+    }
+
+    }
+
+    /* Карта */
+    .hero-section div[style*="width: 450px"] {
+        width: 650px !important; /* Уменьшаем ширину */
+        height: 390px !important; /* Уменьшаем высоту пропорционально */
+    margin-top: 60px !important; /* Добавляем отступ от текста */
+        animation: floatCard 3s ease-in-out infinite !important;
+        left: 8px; /* Сдвигаем карту вправо на 20px */
+        position: relative;
+    }
+
+    /* Определяем keyframes для анимации, если их еще нет */
+    @keyframes floatCard {
+        0%, 100% {
+            transform: perspective(1000px) rotateY(0deg) translateY(0) translateX(8px);
         }
-    </style>
+        50% {
+            transform: perspective(1000px) rotateY(0deg) translateY(-15px) translateX(8px);
+        }
+    }
+
+    /* Уменьшаем отступ после карты */
+    .hero-section div[style*="margin-top: 70px"] {
+        margin-top: 30px !important;
+    }
+
+    .hero-section div[style*="width: 450px"] div[style*="font-size"] {
+        font-size: 1.6rem !important; /* Умень  аем размер шрифта */
+    }
+
+    /* Уменьшаем размер кружков на карте */
+    .hero-section div[style*="width: 450px"] div[style*="width: 35px"] {
+        width: 15px !important;
+        height: 15px !important;
+    }
+
+    .hero-section h1 {
+        font-size: 7rem !important;
+        margin-bottom: 5px;
+        margin-left: 10px;
+    }
+
+    .hero-section h2 {
+        font-size:2.5rem !important;
+        margin-left: 10px;
+        margin-bottom: 10px !important;
+    }
+
+    .hero-section p {
+        font-size: 1.8rem !important;
+        margin-left: 10px;
+        margin-bottom: 15px !important;
+    }
+
+    /* Кнопка */
+    .hero-section .small-hero-button {
+        margin-left: 20px;
+    }
+
+    /* Приближаем бегущую строку к кнопке */
+    .marquee-section {
+        padding-top: 40px !important; /* Увеличиваем верхний отступ */
+        margin-top: 20px !important; /* Добавляем отступ сверху */
+    }
+
+    /* Контейнер бегущей строки */
+    .marquee-overlay {
+        margin-top: 20px !important; /* Дополнительный отступ для контента */
+    }
+
+
+    /* Контейнеры и сетки */
+    .container,
+    .features-container,
+    .reviews-container {
+        grid-template-columns: 1fr !important;
+        gap: 80px;
+        padding: 20px;
+    }
+
+/* Стили для мобильной версии */
+@media (max-width: 768px) {
+    .cards-online-container {
+        flex-direction: column; /* Изменяем расположение карточек на вертикальное */
+        gap: 20px; /* Расстояние между карточками для мобильных устройств */
+        align-items: center; /* Центрируем карточки на экране */
+    }
+
+    .card-type {
+        width: 70%; /* Карточки занимают всю ширину экрана на мобильных */
+    }
+}
+
+    /* Кнопки */
+    .hero-button, .small-hero-button, .modal-button {
+        padding: 15px 25px !important;
+        font-size: 1.6rem !important;
+        width: auto !important;
+        display: inline-block !important;
+    }
+
+
+    /* Карточки */
+    .feature-card {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    /* Модальное окно */
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+        flex-direction: column;
+        margin: 5% auto;
+        border-radius: 15px;
+    }
+
+    .modal-left img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Секция сервисов */
+    .services-section .container {
+        flex-direction: column !important;
+    }
+
+    .service-logos img {
+        width: 90px !important;
+    }
+
+    /* Бегущая строка */
+@media (max-width: 768px) {
+    .marquee {
+        animation: marquee 20s linear infinite; /* Ускоряем анимацию для мобильных устройств до 20 секунд */
+        gap: 25px; /* Уменьшаем расстояние между логотипами на мобильной версии */
+    }
+
+    .marquee img {
+        width: 120px; /* Увеличиваем ширину логотипов для мобильных устройств */
+        height: auto; /* Сохраняем пропорции логотипов */
+    }
+}
+
+    /* Секция "Начать" */
+    .start-section .container {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 20px;
+    }
+
+    /* Отступы секций */
+    section {
+        padding: 40px 15px;
+    }
+}
+
+/* Дополнительные медиа-запросы для очень маленьких экранов */
+@media (max-width: 480px) {
+    .hero-section h1 {
+        font-size: 2rem !important;
+    }
+
+    .hero-button, 
+    .small-hero-button {
+        padding: 12px 20px !important;
+        font-size: 1rem !important;
+    }
+
+    .hero-section h2 {
+        font-size: 1.5rem !important;
+    }
+
+    .feature-card,
+    .review-item {
+        padding: 15px;
+    }
+
+    .feature-card h3 {
+        font-size: 1.4rem;
+    }
+
+    .feature-card p {
+        font-size: 1rem;
+    }
+}
+
+    /* FAQ секция */
+    .faq-question {
+        font-size: 1.2rem;
+        padding: 10px 15px;
+    }
+
+    /* Отзывы */
+    .reviews-container {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Начальная секция */
+    .start-section h2 {
+        font-size: 1.8rem;
+    }
+
+    .start-section p {
+        font-size: 1.2rem;
+    }
+
+}
+
+.mobile-menu {
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(-100%);
+}
+
+.mobile-menu.active {
+    transform: translateX(0);
+}
+
+@media screen and (max-width: 768px) {
+    /* Центрирование текстовой секции с Telegram */
+    .text-section {
+        text-align: center !important;
+        width: 100% !important;
+        padding: 20px !important;
+        margin: 0 auto !important;
+        font-size: 2.8rem !important; /* Увеличили размер */
+        color: #12401E !important;
+        line-height: 1.3 !important; /* Добавили высоту строки для читаемости */
+    }
+
+    /* Уменьшенная центрированная кнопка */
+    .text-section ~ .small-hero-button {
+        display: inline-block !important;
+        margin: 20px auto 40px auto !important;
+        padding: 15px 30px !important; /* Уменьшаем padding */
+        font-size: 1.2rem !important; /* Уменьшаем размер шрифта */
+        width: auto !important;
+        min-width: 200px !important; /* Минимальная ширина */
+        max-width: 80% !important; /* Максимальная ширина */
+        text-align: center !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /* Стили для секции "Оцените все преимущества" */
+    .features-section .feature-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .features-section .feature-card h3 {
+        text-align: center;
+        width: 100%;
+        font-size: 1.8rem;
+        color: #12401E;
+        margin-bottom: 15px;
+    }
+
+    .features-section .feature-card img {
+        width: 70px; /* Фиксированная ширина для иконок */
+        height: 70px; /* Фиксированная высота для иконок */
+        margin: 0 auto 20px;
+    }
+
+    /* Стили для секции с большими изображениями */
+    .features-container .feature-card img[src*="createvirtualcard.png"],
+    .features-container .feature-card img[src*="control.png"],
+    .features-container .feature-card img[src*="rubles.png"] {
+        width: 100%; /* Полная ширина для больших изображений */
+        height: auto;
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /* Центрирование заголовка "Оцените все преимущества" */
+    .features-section {
+        text-align: center !important;
+        padding: 40px 20px !important;
+    }
+
+    .features-section h2 {
+        text-align: center !important;
+        font-size: 2.5rem !important;
+        color: #12401E !important;
+        width: 100% !important;
+        margin: 0 auto 30px auto !important;
+        padding: 0 !important;
+    }
+
+    /* Контейнер для карточек */
+    .features-container {
+        width: 100% !important;
+        max-width: 90% !important;
+        margin: 0 auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 30px !important;
+    }
+
+    /* Стили для карточек */
+    .feature-card {
+        width: 100% !important;
+        margin: 0 auto !important;
+        text-align: center !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /* Центрирование заголовка "Оцените все преимущества" */
+    .features-section {
+        text-align: center !important;
+        width: 100% !important;
+        padding: 40px 0 !important;
+        margin: 0 auto !important;
+    }
+
+    .features-section h2 {
+        text-align: center !important;
+        font-size: 3.3rem !important; /* Увеличили размер заголовка */
+        color: #12401E !important;
+        width: 100% !important;
+        margin: 0 auto 40px auto !important;
+        padding: 0 20px !important;
+        display: block !important;
+    }
+
+    /* Контейнер для карточек */
+    .features-container {
+        width: 90% !important;
+        margin: 0 auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 30px !important;
+        padding: 0 !important;
+    }
+
+    /* Стили для карточек */
+    .feature-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /* Текст в карточках секции "Оцените все преимущества" */
+    .feature-card {
+        padding: 25px !important; /* Увеличиваем отступы внутри карточки */
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    }
+
+    .feature-card p {
+        font-size: 1.5rem !important; /* Значительно увеличиваем размер текста */
+        line-height: 1.4 !important;
+        margin: 15px 0 !important;
+        color: #6A6A6A !important;
+        text-align: center;
+    }
+
+    /* Заголовок секции */
+    .features-section h2 {
+        font-size: 3.3rem;
+        margin: 0 auto 40px;
+        padding: 0 20px;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Заголовки в карточках */
+    .feature-card h3 {
+        text-align: center;
+        width: 100%;
+        font-size: 1.8rem;
+        color: #12401E;
+        margin-bottom: 15px;
+    }
+
+ /* Контейнер карточек */
+    .features-container {
+        width: 90%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        padding: 0;
+    }
+
+    /* Карточки */
+    .feature-card {
+        width: 100%;
+        max-width: 350px;
+        margin: 0 auto;
+        padding: 25px;
+        text-align: center;
+    }
+
+    /* Изображения в карточках */
+    .feature-card img {
+        width: 80%;
+        margin: 0 auto 20px;
+        display: block;
+    }
+
+    /* Текст в карточках других секций */
+    .card-type p {
+        font-size: 1.5rem !important; /* Увеличиваем размер текста */
+        line-height: 1.4 !important;
+        margin: 15px 0 !important;
+        color: #6A6A6A !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /* Увеличиваем размер логотипов */
+    .service-logos img {
+        width: 125px !important; /* Увеличиваем размер каждого логотипа */
+        height: auto !important;
+        margin: 8px !important; /* Добавляем отступы между логотипами */
+    }
+
+    /* Настраиваем сетку логотипов */
+    .service-logos > div {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important; /* 2 логотипа в ряд */
+        gap: 20px !important;
+        justify-items: center !important;
+        align-items: center !important;
+        padding: 20px !important;
+    }
+
+    /* Контейнер для логотипов */
+    .service-logos {
+        width: 100% !important;
+        margin: 30px auto !important;
+    }
+}
+
+/* Стили для десктопной версии */
+.text-section {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 30px !important;
+}
+
+.text-section ~ .small-hero-button {
+    margin-left: 20px !important;
+}
+
+/* Медиа-запрос для мобильной версии */
+@media screen and (max-width: 768px) {
+    .text-section {
+        flex-direction: column !important;
+        text-align: center !important;
+        width: 100% !important;
+        padding: 20px !important;
+        margin: 0 auto !important;
+        font-size: 2.8rem !important;
+        color: #12401E !important;
+        line-height: 1.3 !important;
+    }
+
+    .text-section ~ .small-hero-button {
+        display: block !important;
+        margin: 20px auto 40px auto !important;
+        padding: 15px 30px !important;
+        font-size: 1.2rem !important;
+        width: auto !important;
+        min-width: 200px !important;
+        max-width: 80% !important;
+        text-align: center !important;
+    }
+}
+
+.text-section-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto 40px auto;
+    padding: 0 20px;
+}
+
+.text-section {
+    font-size: 1.8rem;
+    color: #12401E;
+    font-weight: 700;
+    margin: 0;
+    white-space: nowrap; /* Предотвращаем перенос текста */
+}
+
+.text-section-container .small-hero-button {
+    margin: 0;
+    white-space: nowrap;
+}
+
+/* Мобильные стили */
+@media screen and (max-width: 768px) {
+    .text-section-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .text-section {
+        margin-bottom: 20px;
+        font-size: 2.8rem;
+        white-space: normal; /* Разрешаем перенос текста на мобильных */
+        display: inline; /* Делаем текст строчным элементом */
+        line-height: 1.3;
+    }
+}
+
+    /* Добавьте эти стили для мобильной версии */
+@media screen and (max-width: 768px) {
+    .modal-content {
+        margin: 30% auto 0;
+        padding: 20px;
+        width: 85%;
+        max-width: 350px;
+    }
+
+    .modal-right img {
+        display: none; /* Скрываем QR-код на мобильных */
+    }
+
+    .modal-right h2 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+
+    .modal-right p {
+        font-size: 1rem;
+        margin: 10px 0;
+    }
+
+    .modal-left img {
+        width: 1080px;
+        height: auto;
+        margin: 10px 0;
+    }
+
+    /* Делаем кнопку "Продолжить" более заметной */
+    .modal-right .hero-button {
+        padding: 12px 25px;
+        font-size: 1.1rem;
+        margin-top: 15px;
+        display: inline-block;
+    }
+}
+
+</style>
 
 <footer id="footer" class="footer">
     <section id="contact" class="contact">
@@ -1373,3 +2150,5 @@
     </section>
 </footer>
 
+</body>
+</html>
