@@ -871,37 +871,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
 .footer {
     background-color: #F1F1F1;
-        color: #000000;
-    padding: 20px 0;
+    color: #12401E; /* Изменил цвет текста на более контрастный */
+    padding: 40px 20px;
+    text-align: center;
     margin-top: 40px;
 }
 
-.footer-content {
-    text-align: center;
-}
-
-.privacy-link {
-    color: #FFFFFF;
+.footer a {
+    color: #12401E; /* Изменил цвет ссылок для лучшей видимости */
     text-decoration: none;
-    font-weight: bold;
-    padding: 10px 20px;
-    display: inline-block;
-    margin-top: 10px;
-    transition: color 0.3s;
+    transition: color 0.3s ease;
 }
 
-.privacy-link:hover {
+.footer a:hover {
     color: #FF9F00;
 }
 
+/* Добавляем стили для параграфов в футере */
+.footer p {
+    margin: 10px 0;
+    font-size: 1.2rem;
+}
+
+/* Мобильные стили */
 @media screen and (max-width: 768px) {
     .footer {
-        padding: 15px 0;
+        padding: 30px 15px;
     }
     
-    .privacy-link {
-        font-size: 1.2rem;
-        padding: 8px 16px;
+    .footer p {
+        font-size: 1rem;
     }
 }
 
