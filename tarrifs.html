@@ -1,3 +1,9 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=0.6">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+
 <header class="main-header">
     <div class="container">
         <div class="brand">
@@ -7,8 +13,8 @@
             <ul class="center-nav">
                 <li><a href="index.html" class="nav-link">Главная</a></li>
                 <li><a href="#tariffs-section" class="nav-link">Тарифы</a></li>
-                <li><a href="index.html" class="learn-more">FAQ</a></li>
-                <li><a href="index.html" class="nav-link">О нас</a></li>
+        <li><a href="index.html" onclick="scrollToSection('about-section'); toggleMenu()">О нас</a></li>
+        <li><a href="docs.html" onclick="toggleMenu()">Статьи</a></li>
                 <li><a href="index.html" class="nav-link">Контакты</a></li>
             </ul>
         </nav>
@@ -18,7 +24,15 @@
 <div id="qr-modal" class="modal">
     <div class="modal-content">
         <span class="close-button">&times;</span>
-        <img src="img/QRcode.png" alt="QR Code to chat bot">
+        
+        <!-- QR код для десктопа -->
+        <img src="img/QRcode.png" alt="QR Code to chat bot" class="qr-code">
+        
+        <!-- Новый контейнер для изображения на мобильных -->
+        <div class="modal-image-container">
+            <img src="img/vipustit.png" alt="Mobile promotion" class="mobile-image">
+        </div>
+        
         <h2>AtlasCard - это удобное мини-приложение в Telegram</h2>
         <p>Нажмите "Продолжить", чтобы открыть с текущего устройства</p>
         <a href="https://t.me/AtlasCard_bot" class="continue-button">Продолжить →</a>
@@ -117,7 +131,7 @@
                         <td>Пополнение в USDT</td>
                         <td>Нет</td>
                         <td>Да</td>
-                        <td>Нетtd>
+                        <td>Нет</td>
                     </tr>
                     <tr>
                         <td>Возврат/Обмен</td>
@@ -353,9 +367,10 @@
 </div>
 
 
+<!-- Замените кнопку на ссылку -->
 <div class="footer">
     <div class="container">
-        <button class="privacy-policy-button">Политика конфиденциальности</button>
+        <a href="privacy.html" class="privacy-policy-button">Политика конфиденциальности</a>
     </div>
 </div>
 
@@ -423,15 +438,27 @@
 </style>
 
 <style>
-    /* Footer Styling */
-    .footer {
-        background-color: #F1F1F1;
-        color: #FFFFFF;
-        padding: 20px;
-        text-align: center;
-        margin-top: 40px;
-    }
 
+/* Стили для ссылки политики конфиденциальности */
+.privacy-policy-button {
+    background-color: transparent;
+    color: #12401E;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.privacy-policy-button:hover {
+    color: #FF9F00;
+}
+
+@media screen and (max-width: 768px) {
     .privacy-policy-button {
         background-color: #F1F1F1;
         color: #FFFFFF;
@@ -443,11 +470,7 @@
         cursor: pointer;
         transition: background-color 0.3s;
     }
-
-    .privacy-policy-button:hover {
-        background-color: #FFFFFF;
-        color: #12401E;
-    }
+}
 
     /* Main Header Styling */
     body {
@@ -746,6 +769,272 @@
         background-color: #FFFFFF;
         color: #12401E;
     }
+
+@media screen and (max-width: 768px) {
+    /* Секция с картой */
+    .card-animation-section {
+        padding: 40px 20px;
+    }
+
+    .card-layout {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 30px; /* Добавляем отступ между картой и текстом */
+    }
+
+    .card-animation {
+        width: 100%;
+        order: -1; /* Перемещаем карту наверх */
+        display: flex;
+        justify-content: center;
+    }
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 15px; /* Уменьшаем расстояние между кнопками */
+}
+
+.tab-button {
+    background-color: #12401E;
+    color: #FFFFFF;
+    border: none;
+    padding: 12px 20px; /* Уменьшаем внутренние отступы */
+    margin: 0; /* Убираем внешние отступы */
+    cursor: pointer;
+    font-size: 1.2rem; /* Уменьшаем размер шрифта */
+    font-weight: bold;
+    border-radius: 8px; /* Немного уменьшаем скругление углов */
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Медиа-запрос для мобильных устройств */
+@media screen and (max-width: 768px) {
+    .tabs {
+        gap: 35px; /* Еще меньше расстояние на мобильных */
+    }
+
+    .tab-button {
+        padding: 10px 15px; /* Меньше отступы на мобильных */
+        font-size: 1.5rem; /* Меньше шрифт на мобильных */
+    }
+}
+
+    /* Увеличиваем размер карты */
+    .animated-card {
+        width: 80% !important; /* Уменьшаем немного ширину карты */
+        max-width: 350px; /* Максимальная ширина */
+        height: auto;
+        margin: 0 auto;
+        display: block;
+    }
+
+    /* Стили для текстового блока */
+    .card-info {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+        text-align: center;
+        padding: 0 20px;
+    }
+
+    .card-info h2 {
+        font-size: 2.5rem; /* Уменьшаем размер заголовка */
+        margin-bottom: 15px;
+        margin-top: 0;
+    }
+
+    .card-info p {
+        font-size: 1.6rem; /* Уменьшаем размер текста */
+        margin: 0;
+        padding: 0;
+    }
+
+.card-info h3 {
+    font-size: 2rem; /* Уменьшаем с 3rem до 2rem */
+    color: #12401E;
+    margin-bottom: 10px;
+}
+
+.card-button {
+    background-color: #FF9F00;
+    color: #FFFFFF;
+    padding: 20px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    margin-top: 25px; /* Добавляем отступ сверху */
+    font-size: 1.6rem; /* Увеличиваем размер текста */
+    transition: background-color 0.3s;
+}
+
+/* Для мобильных устройств */
+@media screen and (max-width: 768px) {
+    .card-button {
+        margin-top: 20px; /* Немного меньший отступ на мобильных */
+        font-size: 1.4rem; /* Немного меньший размер шрифта на мобильных */
+        padding: 15px 25px; /* Корректируем padding для мобильных */
+    }
+}
+
+.card-button:hover {
+    background-color: #12401E;
+}
+
+/* Для мобильных устройств можно сделать еще меньше */
+@media screen and (max-width: 768px) {
+    .card-info h3 {
+        font-size: 2.5rem;
+        margin-bottom: 8px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .tariffs-table {
+        width: 100%;
+        font-size: 1.2rem; /* Увеличиваем базовый размер шрифта */
+        margin: 30px 0; /* Добавляем отступы сверху и снизу */
+    }
+
+    .tariffs-table th, 
+    .tariffs-table td {
+        padding: 15px 12px; /* Увеличиваем внутренние отступы */
+        font-size: 1.1rem; /* Увеличиваем размер текста в ячейках */
+    }
+
+    .tariffs-table th {
+        font-size: 1.2rem; /* Увеличиваем размер заголовков */
+        font-weight: bold;
+    }
+
+    /* Увеличиваем размер примечаний под таблицей */
+    .tariffs-note {
+        font-size: 1.1rem;
+        margin-top: 20px;
+        line-height: 1.4;
+    }
+
+
+/* Стили для модального окна */
+.modal-content {
+    background-color: #12401E;
+    color: #FFFFFF;
+    padding: 30px 20px;
+    border-radius: 15px;
+    width: 90%; /* Базовая ширина */
+    max-width: 500px;
+    margin: auto;
+    position: relative;
+    text-align: center;
+}
+
+/* Стили для изображения */
+.modal-content img {
+    width: 60%;
+    max-width: 200px;
+    height: auto;
+    margin: 15px auto;
+}
+
+.modal-content h2 {
+    font-size: 1.8rem;
+    margin: 15px 0;
+}
+
+.modal-content p {
+    font-size: 1.2rem;
+    margin: 15px 0;
+}
+
+@media screen and (max-width: 768px) {
+    .modal-content {
+        width: 140%;
+        padding: 20px;
+        margin: 20px auto;
+    }
+
+    .modal-image-container {
+        width: 100%;
+        height: auto;
+        margin: 10px 0;
+    }
+
+    .mobile-image {
+        width: 100% !important;
+        height: 600px !important; /* Увеличиваем фиксированную высоту */
+        min-width: 300px !important;
+        max-width: none !important;
+        max-height: none !important;
+        object-fit: contain !important;
+        object-position: center !important;
+        transform: scale(1.4) !important; /* Увеличиваем изображение на 20% */
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .qr-code {
+        display: none !important;
+    }
+
+    /* Уменьшаем отступы */
+    .modal-content h2 {
+        font-size: 1.8rem;
+        margin: 10px 0;
+    }
+
+    .modal-content p {
+        font-size: 1.4rem;
+        margin: 10px 0;
+    }
+
+    .continue-button {
+        width: 80%;
+        margin: 10px auto;
+        padding: 15px;
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+    /* Стили для крестика закрытия */
+    .close-button {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        color: #FFFFFF;
+        font-size: 35px; /* Увеличиваем размер */
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 1000; /* Добавляем высокий z-index */
+        width: 40px; /* Увеличиваем область нажатия */
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.2); /* Добавляем полупрозрачный фон */
+        border-radius: 50%; /* Делаем круглым */
+        padding: 0;
+        margin: 0;
+    }
+
+    .close-button:hover {
+        color: #FF9F00;
+        background: rgba(0, 0, 0, 0.4);
+    }
+
+    /* Убедимся, что модальное окно тоже имеет z-index */
+    .modal {
+        z-index: 999;
+    }
+
+    .modal-content {
+        z-index: 1000;
+    }
+}
+
 </style>
 
 <script>
@@ -833,4 +1122,3 @@
         <p>Свяжитесь с нами: <a href="https://t.me/AtlasCardSupportBot">t.me/AtlasCardSupportBot</a></p>
     </section>
 </footer>
-
